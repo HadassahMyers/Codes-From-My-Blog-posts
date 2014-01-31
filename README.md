@@ -1,1 +1,1 @@
-codes posted in my blog articles , www.hackintoshrao.wordpress.com 
+codes posted in my blog articles , www.hackintoshrao.com 
