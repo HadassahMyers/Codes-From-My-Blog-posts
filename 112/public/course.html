@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Backbone App</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+		<!--  Underscore.JS is the dependency library for Backbone.JS-->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<!-- Jquery is used for DOM manipulation-->
+		<script type="text/javascript" src="http://backbonejs.org/backbone-min.js"></script>
+	</head>
+	<body>
+		<!--Fieldset helps logically grouping the HTML elements  -->	
+		<fieldset>
+			<legend>Post Data To Node.JS Server</legend>
+			<!-- Input Field to Enter the data to be sent to the server
+				Backbone.JS code is written to send POST request to the server 
+				on clicking the button -->
+			<input type="text" id="course_type" placeholder="Enter the Course Name" required />
+			<input type="button" id="post_data" value="Send data to the Server" /> 
+	    </fieldset>
+	    <fieldset>
+	    	<legend>Get Data From Node.JS Server</legend>
+	    	<input type="button" id="get_data" value="Get Data From Server">
+	    	<!--Backbone.JS code is written to send GET request to the server on clicking the button -->
+	    </fieldset>
+		<div id="data"></div>
+		<!-- Div element where data from the server is placed-->
+	</body>
+	<!-- Backbone.JS code starts here -->
+	<script >
+	
+		$(document).ready(function(){
+			Courses = Backbone.Collection.extend({
+					url:'/courses'
+				});
+	
+			$('#post_data').click(function(){
+				console.log('Post Clicked');
+				post_data_to_the_server();
+				
+			});
+			$('#get_data').click(function(){
+				console.log('Get Clicked');
+				
+			});
+			
+			function get_data_from_server(){
+				var courses = new Courses();
+				 courses.fetch({
+				 	success:function(data_array){
+				 		data = data_array.models[0].attributes;
+				 		data = JSON.stringify(data);
+				 		console.log(data);
+				 		var data = "<p>" + data + "</p>" ; 
+				 		$('#data').append(data);
+				 	}
+				 });
+		    }  
+			
+			function post_data_to_the_server(){
+				var courses = new Courses();
+				courses.fetch({data:{course_name:$('#course_type').val()},type:'POST' });
+				$('#course_type').val('');	
+			}
+		});
+		</script>
+</html>
