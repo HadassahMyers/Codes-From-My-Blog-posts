@@ -32,9 +32,11 @@
 	<script >
 	
 		$(document).ready(function(){
-			Courses = Backbone.Collection.extend({
-					url:'/courses'
-				});
+			var CourseModel = Backbone.Model.extend({});
+	var CourseCollection = Backbone.Collection.extend({
+ 		 model: CourseModel,
+ 		 url: '/courses'
+		});
 	
 			$('#post_data').click(function(){
 				console.log('Post Clicked');
@@ -61,14 +63,9 @@
 		    }  
 			
 			function post_data_to_the_server(){
-				var courses = new Courses();
-				var CourseModel = Backbone.Model.extend({});
-		var CourseCollection = Backbone.Collection.extend({
- 		 model: CourseModel
-		  url: '/courses'
-			});
-		var courses = new CourseCollection();
-		courses.create({course_name:"data structures"});
+					console.log("inside post")
+					var courses = new CourseCollection();
+					courses.create({course_name:"data structures"});
 			}
 		});
 		</script>

@@ -27,7 +27,7 @@ app.get('/courses',function(req,res){
    and callback function is executed in respose to it*/
 app.post('/courses',function(req,res){
 	
-	console.log('Post Request Accepted' );
+	 console.log('POST: ' + JSON.stringify(req.body));
 });
 
 http.createServer(app).listen(8124);
