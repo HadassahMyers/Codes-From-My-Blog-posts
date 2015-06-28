@@ -1,4 +1,4 @@
-package gobench
+package bench1
 
 func GoMapAdd() {
 	m := map[int]int{0: 0, 1: 1}

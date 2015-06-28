@@ -1,4 +1,4 @@
-package gobench
+package bench1
 
 import (
 	"testing"
